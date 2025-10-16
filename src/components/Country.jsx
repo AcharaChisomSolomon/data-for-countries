@@ -1,3 +1,18 @@
+import { useState } from "react"
+
+const CountryDisplay = ({ country }) => {
+  const [showAll, setShowAll] = useState(false)
+
+  return (
+    <div>
+      <p>
+        {country.name.common} 
+        <button onClick={() => setShowAll(!showAll)}>{showAll ? 'hide': 'show'}</button></p>
+      {showAll && <CountryDetail country={country} />}
+    </div>
+  )
+}
+
 const CountryDetail = ({ country }) => {
   return (
     <div>
@@ -34,7 +49,7 @@ const Country = ({ countriesToDisplay, searchTerm }) => {
 
   return (
     <div>
-      {countriesToDisplay.map((c, id) => <p key={id}>{c.name.common}</p>)}
+      {countriesToDisplay.map((c, id) => <CountryDisplay key={id} country={c} />)}
     </div>
   )
 }
